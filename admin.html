@@ -4,43 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore-compat.js"></script>
+    
     <title>Admin</title>
 </head>
 
 <body>
     <h1>Hello <span id="admin-name"></span> </h1>
 
+    <div id="success" style="background-color: greenyellow; display: none;">
+ Document Upload Successful
+    </div>
+
     <div class="section">
-        <form action="">
-
-            <!-- <p>Message</p> -->
-            <label for="message">Message</label>
-            <textarea name="message" id="message" cols="30" rows="10"></textarea>
-
-            <!-- <p>Date and Time</p> -->
-            <label for="date">Date and Time</label>
-            <input type="datetime-local" name="date" id="date">
-
-            <label for="">Support</label>
-            <div class="tel">
-                <label for="tel" style="font-weight: lighter;">Telephone:</label>
-                <input type="tel" name="tel" id="tel">
-            </div>
 
 
-            <div class="email">
-                <label for="email" style="font-weight: lighter;">Email: </label>
-                <input type="email" name="email" id="email">
-            </div>
+        <!-- <p>Message</p> -->
+        <label for="message">Message</label>
+        <textarea required name="message" id="message" cols="30" rows="10"></textarea>
 
-            <div class="confirm">
-                <label for="checkbox" style="font-weight: lighter;">Confirm details</label>
-                <input type="checkbox" name="checkbox" id="checkbox" required>
-            </div>
+        <input type="email" name="" id="email" required>
 
-            <input type="submit" value="Submit">
+        <input type="date" name="" id="date" required>
 
-        </form>
+        <button id="submit">Submit</button>
+
+
     </div>
 
     <style>
@@ -81,6 +72,9 @@
 
         adminName.innerText = 'Norman'
     </script>
+    
+    <script src="admin.js"></script>
+
 </body>
 
 </html>

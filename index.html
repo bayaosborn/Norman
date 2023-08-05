@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore-compat.js"></script>
+    
     <title>Blackout Updates</title>
    <link rel="stylesheet" href="index.css">
    <style>
@@ -73,23 +77,13 @@ input[type="submit"] {
     </header>
 
     <main>
-        <div class="update-card">
-            <h2>Planned Maintenance</h2>
-            <p>Date: July 30, 2023</p>
-            <p>Time: 10:00 PM - 2:00 AM (UTC)</p>
-            <p>Details: We will be performing scheduled maintenance on our systems. During this period,
-                there will be a temporary blackout affecting various services. We apologize for any inconvenience
-                caused and appreciate your understanding.</p>
+
+        <div>
+            <h1 id="heading"></h1>
+            <p id="message"></p>
+            <p id="date"></p>
         </div>
 
-        <div class="update-card">
-            <h2>Unplanned Outage</h2>
-            <p>Date: July 25, 2023</p>
-            <p>Time: Ongoing</p>
-            <p>Details: We are currently experiencing an unplanned outage due to an unexpected issue. Our team is
-                actively investigating the problem and working on resolving it as quickly as possible. We will
-                provide updates as we have more information.</p>
-        </div>
 
         <!-- Add more update cards for other incidents -->
 
@@ -107,6 +101,8 @@ input[type="submit"] {
     <footer>
         <p>&copy; 2023 Your Organization. All rights reserved.</p>
     </footer>
+
+    <script src="index.js"></script>
 
 </body>
 

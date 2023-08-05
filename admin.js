@@ -1,140 +1,59 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, collection, Timestamp, setDoc, addDoc, } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
-
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID,
-  measurementId: process.env.MEASUREMENT_ID
+    apiKey: "AIzaSyBM_3brfuZeGxa2ESW7peV1L5arpErRcP0",
+    authDomain: "norman-b1fa4.firebaseapp.com",
+    projectId: "norman-b1fa4",
+    storageBucket: "norman-b1fa4.appspot.com",
+    messagingSenderId: "554557044751",
+    appId: "1:554557044751:web:2e4acb2576eee924974b7a"
 };
-const app = initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
-const auth = getAuth();
-const storage = getStorage(app);
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-
-
-// check the authentication of user
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    const email = user.email
+// Initialize Cloud Firestore and get a reference to the service
+const db = firebase.firestore();
 
 
-    const titleInput = document.getElementById('title');
-    const nameInput = document.getElementById('name');
-    const contentInput = document.getElementById('content');
-    var imageInput = document.getElementById('image-input');
-    var documentInput = document.getElementById("document-input");
-
-    const saved = document.getElementById("save-button");
+//Add document to frontend. 
+const heading = document.getElementById('heading')
+const message = document.getElementById('message')
+const date = document.getElementById('date')
+const submit = document.getElementById('submit')
 
 
 
-    // document.getElementById("save-button") 
-    saved.addEventListener("click", function () {
-      const title = titleInput.value;
-      const name = nameInput.value;
-      const content = contentInput.value;
-      const email = user.email;
-      const userId = user.uid;
-      const postImage = imageInput.files[0];
-      var document = documentInput.files[0];
 
 
-      // create a reference to the Firestore collection
-      const postsCollection = collection(db, "posts");
+submit.addEventListener('click', function () {
 
-      // create a new document in the collection
-      addDoc(postsCollection, {
-        name: name,
-        title: title,
-        email: email,
-        content: content,
-        userId: userId,
-        postedAt: Timestamp.fromDate(new Date())
-      }).then((newPostRef) => {
-        // update the document with additional data
-        if (postImage) {
-          const storageRef = ref(storage, `postImage/${userId}/${newPostRef.id}`);
-          uploadBytes(storageRef, postImage).then(() => {
-            getDownloadURL(storageRef).then((downloadURL) => {
-              setDoc(newPostRef, {
-                name: name,
-                title: title,
-                email: email,
-                content: content,
-                userId: userId,
-                postedAt: Timestamp.fromDate(new Date()),
-                postImageUrl: downloadURL
-              }, { merge: true }).then(() => {
+    const messageVal = message.value
+    const headingVal = heading.value
+    const dateVal = date.value
+    const success = document.getElementById('success')
 
 
-                window.location = "/";
-                // redirect to home page after a delay
-                setTimeout(() => {
-                  window.location = "/";
-                }, 2000);
-              }).catch((error) => {
-                console.error("Error updating document: ", error);
-              });
-            }).catch((error) => {
-              console.error("Error getting download URL: ", error);
-            });
-          }).catch((error) => {
-            console.error("Error uploading image: ", error);
-          });
-        }
+    // Add a new document in collection "cities"
+    db.collection("blackoutInfo").add({
+        message: messageVal,
+        heading: headingVal,
+        date: dateVal
+    })
+        .then(() => {
 
-        if (document) {
-          const storageRef = ref(storage, `postDocuments/${userId}/${newPostRef.id}`);
-          uploadBytes(storageRef, document).then(() => {
-            getDownloadURL(storageRef).then((documentURL) => {
-              setDoc(newPostRef, {
-                name: name,
-                title: title,
-                email: email,
-                content: content,
-                userId: userId,
-                postedAt: Timestamp.fromDate(new Date()),
-                documentUrl: documentURL
-              }, { merge: true }).catch((error) => {
-                console.error("Error updating document: ", error);
-              });
-            }).catch((error) => {
-              console.error("Error getting download URL: ", error);
-            });
-          }).catch((error) => {
-            console.error("Error uploading document: ", error);
-          });
-        }
-      }).catch((error) => {
-        console.error("Error adding document: ", error);
-      });
+                success.style.display = 'block'
+            
+            console.log("Document successfully written!");
+        })
+        .catch((error) => {
+            console.error("Error writing document: ", error);
+        });
 
 
-      saved.innerText = 'Saved'
-      saved.style.backgroundColor = 'red'
+})
 
 
 
 
 
 
-
-
-    });
-
-
-
-
-  } else {
-    window.location = "/sign-in";
-  }
-});
