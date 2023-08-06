@@ -14,16 +14,37 @@ firebase.initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 const db = firebase.firestore();
 
-const heading = document.getElementById('heading')
-const message = document.getElementById('message')
-const date = document.getElementById('date')
+const section = document.getElementById('section')
+//const message = document.getElementById('message')
+//const date = document.getElementById('date')
+
+section.innerHTML = "";
 
 
 db.collection("blackoutInfo").get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+        //console.log(doc.id, " => ", doc.data().email);
 
-        
+        const heading = doc.data().heading;
+        const message = doc.data().message;
+        const date = doc.data().date;
+
+        // Create a new paragraph element for each email and append it to the container
+        const headings = document.createElement("h3");
+        const messages = document.createElement("p");
+        const dates = document.createElement("span")
+
+        headings.textContent = heading;
+        messages.textContent = message
+        dates.textContent= `Posted on ${date}`
+
+        section.appendChild(headings);
+        section.appendChild(messages);
+        section.appendChild(dates);
+
+
+
+
     });
 });
