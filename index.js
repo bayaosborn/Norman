@@ -37,7 +37,7 @@ db.collection("blackoutInfo").get().then((querySnapshot) => {
 
         headings.textContent = heading;
         messages.textContent = message
-        dates.textContent= `Posted on ${date}`
+        dates.textContent= `Expected date ${date}`
 
         section.appendChild(headings);
         section.appendChild(messages);
