@@ -4,10 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+      <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore-compat.js"></script>
+    
 </head>
 <body>
-    
+    <main>
 
+        <div id="section">
+            
+            
+        </div>
+
+
+        <!-- Add more update cards for other incidents -->
+
+        <div class="signin-section">
+            <h2>Sign In</h2>
+            <a href="/sign-in.html">
+                <button>
+                    Sign In
+                </button>
+            </a>
+        </div>
+
+    </main>
+    <style>
+   
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        h1 {
+            margin: 0;
+            text-align: center;
+        }
+        
+        main {
+            padding: 20px;
+        }
+        
+        .update-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        footer {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        .signin-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            padding: 8px;
+            margin: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        /* CSS */
+        /* Style for the headings */
+        h3 {
+          color: #333;
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 5px;
+          border-top: #333 1px solid;
+        
+        }
+        
+        /* Style for the messages */
+        p {
+          color: #555;
+          font-size: 14px;
+          line-height: 1.5;
+          margin-bottom: 10px;
+        
+        }
+        
+        /* Style for the dates */
+        span {
+          color: #888;
+          font-size: 12px;
+          font-style: italic;
+        }
+        
+        
+           </style>
     <script src="posts.js"></script>
 </body>
 </html>
